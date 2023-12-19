@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-2">
+
+        <div class="row">
+
+            <h1 class="col-6">Add a New Recipe</h1>
+
+            <a href="/dashboard" class="btn btn-secondary col-2">back to recipes</a>
+
+            <a href="/logout" class="btn btn-secondary col-2">Logout</a>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-8 offset-2">
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% if messages %}
+
+                <div class="alert alert-danger" role="alert">
+
+                    <ul class="list-unstyled mb-0">
+
+                        {% for category , message in messages %}
+
+                        <li class="{{ category }}">{{ message }}</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                    {% endif %}
+
+                    {% endwith %}
+
+                </div>
+
+                <form action="/recipes/new/process" method="post">
+
+                    <div class="mb-3">
+
+                        <label for="name" class="form-label">Name:</label>
+
+                        <input type="text" name="name" id="name" class="form-control">
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="description" class="form-label">Description:</label>
+
+                        <textarea name="description" id="description" class="form-control"></textarea>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="instructions" class="form-label">Instructions:</label>
+
+                        <textarea name="instructions" id="instructions" class="form-control"></textarea>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="date_made" class="form-label">Date Made On:</label>
+
+                        <input type="date" name="date_made" id="date_made" class="form-control">
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">Under 30 Minutes:</label>
+
+                        <div class="form-check form-check-inline">
+
+                            <input type="radio" name="under30" id="under30_yes" value="1" class="form-check-input">
+
+                            <label for="under30_yes" class="form-check-label">Yes</label>
+
+                        </div>
+
+                        <div class="form-check form-check-inline ">
+
+                            <input type="radio" name="under30" id="under30_no" value="0" class="form-check-input">
+
+                            <label for="under30_no" class="form-check-label">No</label>
+
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Submit</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+</body>
+</html>
