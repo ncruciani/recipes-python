@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+
+        <div class="row">
+
+            <h1 class="col-6">View Recipe</h1>
+
+            <a href="/dashboard" class="btn btn-secondary col-2">Dashboard</a>
+
+            <a href="/user/logout" class="btn btn-secondary col-2">Logout</a>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-6">
+
+                <h2>{{ recipe.name }}</h2>
+
+            </div>
+
+            <div class="col-6">
+
+                <p>Posted by: {{ recipe.creator.first_name }}</p>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <div class="border border-dark rounded p-3">
+
+                    <div class="row mb-3">
+
+                        <p class="col-4">Description:</p>
+
+                        <p class="col-8">{{ recipe.description }}</p>
+
+                    </div>
+
+                    <div class="row mb-3">
+
+                        <p class="col-4">Under 30 Minutes?</p>
+
+                        <p class="col-8">{{ "Yes" if recipe.under30 == 1 else "No" }}</p>
+
+                    </div>
+
+                    <div class="row mb-3">
+
+                        <p class="col-4">Instructions:</p>
+
+                        <p class="col-8">{{ recipe.instructions }}</p>
+
+                    </div>
+
+                    <div class="row mb-3">
+
+                        <p class="col-4">Date Made:</p>
+
+                        <p class="col-8">{{ recipe.date_made.strftime('%B %dth, %Y') }}</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

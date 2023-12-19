@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Edit Recipe</title>
+</head>
+<body>
+    <div class="container mt-2">
+
+        <div class="row">
+
+            <h1 class="col-6">Edit Recipe</h1>
+
+            <a href="/dashboard" class="btn btn-secondary col-2">Dashboard</a>
+
+            <a href="/user/logout" class="btn btn-secondary col-2">Logout</a>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-8 offset-2">
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% if messages %}
+
+                    {% for category, message in messages %}
+
+                        <div class="alert alert-{{ category }}" role="alert">
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+                {% endwith %}
+
+                <form action="/recipes/edit/process/{{ recipe.id }}" method="post">
+
+                    <div class="mb-3">
+
+                        <label for="name" class="form-label">Name:</label>
+                        
+                        <input type="text" name="name" id="name" class="form-control" value="{{ recipe.name }}">
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="description" class="form-label">Description:</label>
+
+                        <textarea name="description" id="description" class="form-control">{{ recipe.description }}</textarea>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="instructions" class="form-label">Instructions:</label>
+
+                        <textarea name="instructions" id="instructions" class="form-control">{{ recipe.instructions }}</textarea>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="date_made" class="form-label">Date Made On:</label>
+
+                        <input type="date" name="date_made" id="date_made" class="form-control" value="{{ recipe.date_made }}">
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">Under 30 Minutes:</label>
+
+                        <div class="form-check form-check-inline">
+
+                            <input type="radio" name="under30" id="under30_yes" value="1" class="form-check-input" {% if recipe.under30 == 1 %}checked{% endif %}>
+
+                            <label for="under30_yes" class="form-check-label">Yes</label>
+
+                        </div>
+
+                        <div class="form-check form-check-inline ">
+
+                            <input type="radio" name="under30" id="under30_no" value="0" class="form-check-input" {% if recipe.under30 == 0 %}checked{% endif %}>
+
+                            <label for="under30_no" class="form-check-label">No</label>
+
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Update</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+</body>
+</html>
